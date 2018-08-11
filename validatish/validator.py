@@ -238,7 +238,7 @@ class Any(CompoundValidator):
             'please-fix': "Please fix any of: %(errors)s",
         }
         if self.messages:
-            _messages.update(messages)
+            _messages.update(self.messages)
         raise Invalid(_messages['please-fix']%{'errors':message}, exceptions, self)
 
     def __repr__(self):
