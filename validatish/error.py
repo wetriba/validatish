@@ -49,6 +49,12 @@ def _flatten(s, toiter=iter):
                 yield subelem
 
 
+try:
+    basestring
+except NameError:
+    basestring = str
+
+
 def _keepstrings(seq):
     if isinstance(seq, basestring):
         raise TypeError

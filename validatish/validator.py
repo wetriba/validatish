@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 from validatish import validate
-from error import Invalid
+from .error import Invalid
 
 
 #####
