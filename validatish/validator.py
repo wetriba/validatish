@@ -37,7 +37,7 @@ class Required(Validator):
     def __call__(self, v):
         try:
             validate.is_required(v, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
 
@@ -51,7 +51,7 @@ class String(Validator):
     def __call__(self, v):
         try:
             validate.is_string(v)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
 
@@ -65,7 +65,7 @@ class PlainText(Validator):
     def __call__(self, v):
         try:
             validate.is_plaintext(v,extra=self.extra, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
 
@@ -78,7 +78,7 @@ class Email(Validator):
     def __call__(self, v):
         try:
             validate.is_email(v, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
 
@@ -91,7 +91,7 @@ class DomainName(Validator):
     def __call__(self, v):
         try:
             validate.is_domain_name(v, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
 
@@ -109,7 +109,7 @@ class URL(Validator):
     def __call__(self, v):
         try:
             validate.is_url(v, full=self.full, absolute=self.absolute, relative=self.relative,  messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
     def __repr__(self):
@@ -125,7 +125,7 @@ class Integer(Validator):
     def __call__(self, v):
         try:
             validate.is_integer(v, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
 
@@ -138,7 +138,7 @@ class Number(Validator):
     def __call__(self, v):
         try:
             validate.is_number(v, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
 
@@ -153,7 +153,7 @@ class Equal(Validator):
     def __call__(self, v):
         try:
             validate.is_equal(v, self.compared_to, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
     def __repr__(self):
@@ -170,7 +170,7 @@ class OneOf(Validator):
     def __call__(self, v):
         try:
             validate.is_one_of(v, self.set_of_values, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
     def __repr__(self):
@@ -188,7 +188,7 @@ class Length(Validator):
     def __call__(self, v):
         try:
             validate.has_length(v, min=self.min, max=self.max, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
     def __repr__(self):
@@ -206,7 +206,7 @@ class Range(Validator):
     def __call__(self, v):
         try:
             validate.is_in_range(v, min=self.min, max=self.max, messages=self.messages)
-        except Invalid, e:
+        except Invalid as e:
             raise Invalid(e.message, validator=self)
 
     def __repr__(self):
@@ -228,7 +228,7 @@ class Any(CompoundValidator):
         for validator in self.validators:
             try:
                 validator(v)
-            except Invalid, e :
+            except Invalid as e:
                 exceptions.append(Invalid(e.message, e.exceptions, validator))
             else:
                 return
@@ -255,7 +255,7 @@ class All(CompoundValidator):
         for validator in self.validators:
             try:
                 validator(v)
-            except Invalid, e:
+            except Invalid as e:
                 exceptions.append(Invalid(e.message, e.exceptions, validator))
 
         if len(exceptions):
