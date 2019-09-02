@@ -37,6 +37,11 @@ class Invalid(Exception):
     def _set_message(self, message): self._message = message
     message = property(_get_message, _set_message)
 
+    def __getitem__(self, index):
+        # backward compatibility
+        # Python 3 exceptions don't behave as sequences anymore
+        return self.args[index]
+
 
 def _flatten(s, toiter=iter):
     try:
